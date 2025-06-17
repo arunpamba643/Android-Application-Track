@@ -1,15 +1,15 @@
 # Static Analysis
 
-Static Analysis involve with the apk file of the android application...here, we have to decompile the application to analys the application.\
+Static Analysis involve with the apk file of the android application...here, we have to decompile the application to analys the application.
 
 Tools involved in Static Analysis are\
 MobSF : Open-source Auto-machine tool for static analysis\
 JadX : Open-source application helps to decompile the application\
-APKtool : Open source tool for decompiling the application\
+APKtool : Open source tool for decompiling the application
 
-So, To perform the static analysis first we have to decompile the application. this process is also called as reverse engineering.\
+So, To perform the static analysis first we have to decompile the application. this process is also called as reverse engineering.
 
-Use the JadX tool to decompile the application and look for the below files\
+Use the JadX tool to decompile the application and look for the below files
 1. Manifest file
 2. signature file
 3. Other files
