@@ -15,7 +15,7 @@ Use the JadX tool to decompile the application and look for the below files
 3. Other files
 
 ### Manifest file
-In mainifest file look for the below details of the application\
+In mainifest file look for the below details of the application
 1. Minimum SDK Version : need above 29
 2. ClearTextPassword : Needs to be in False
 3. Deugging : Needs to be in False
@@ -23,7 +23,7 @@ In mainifest file look for the below details of the application\
 5. Export Activities : Look for the Export activities which are having value true
 
 ### Signature file
-In Signature file look for the below details of the application\
+In Signature file look for the below details of the application
 
 1. Look for Algorithm and encryption Methods
 2. Look for the Signature versions(mainy look for V2 it needs to be in true or else Jenus vulnerability may occure)
