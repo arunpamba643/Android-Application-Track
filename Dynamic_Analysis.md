@@ -16,3 +16,19 @@ In Dynamic Analysis maily look for the below Vulnerabilities
 4. Log files
 
 ## 1.  Root Detection
+
+The apk should not be running on rooted mobiles...So, the app must contain root detection mechanism.. and if the device is rooted mobile the apk should not work\
+
+for bypassing the root detection mechanism use the below methods,
+1. Use Objection\
+use the objection and explore the app using below command
+```bash
+objection -g <com.someapp.name> explore
+```
+```bash
+android root disable
+```
+2. Use frida Universal scripts
+
+3. Android Hooking Method
+
