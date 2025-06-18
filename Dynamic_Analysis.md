@@ -20,7 +20,7 @@ In Dynamic Analysis maily look for the below Vulnerabilities
 The apk should not be running on rooted mobiles...So, the app must contain root detection mechanism.. and if the device is rooted mobile the apk should not work\
 
 for bypassing the root detection mechanism use the below methods,
-1. Use Objection\
+#### 1. Use Objection\
 use the objection and explore the app using below command
 ```bash
 objection -g <com.someapp.name> explore
@@ -28,7 +28,7 @@ objection -g <com.someapp.name> explore
 ```bash
 android root disable
 ```
-2. Android Hooking Method
+#### 2. Android Hooking Method
 
 List classes and methods:
 
@@ -56,7 +56,7 @@ Change the method's return value:
 android hooking set return_value 'somemethod' 'somevalue'
 ```
 
-3. Use Frida Universal Bypass Scripts
+#### 3. Use Frida Universal Bypass Scripts
 
 
 Useful resources:
@@ -82,7 +82,7 @@ SSL Pinning is a security mechanism which helps to prevent the application from 
 
 To bypass SSL Pinning, we can use the following methods:
 
-1. Use Objection
+#### 1. Use Objection
 Bypass SSL pinning:
 
 ```bash
@@ -91,7 +91,7 @@ android sslpinning disable --quiet
 objection -g com.someapp.dev explore --startup-command 'android sslpinning disable --quiet'
 ```
 
-2. Use Frida Universal Bypass Scripts
+#### 2. Use Frida Universal Bypass Scripts
 
 Bypass SSL Pinning using [android-ssl-pinning-bypass-2](https://codeshare.frida.re/@ivan-sincek/android-ssl-pinning-bypass-2) script:
 
@@ -100,7 +100,7 @@ frida -U -no-pause -l android-ssl-pinning-bypass-2.js -f com.someapp.dev
 
 frida -U -no-pause --codeshare ivan-sincek/android-ssl-pinning-bypass-2 -f com.someapp.dev
 ```
-3. Use Android Hooking Method
+#### 3. Use Android Hooking Method
 (same as root detection bypass)
 List classes and methods:
 
