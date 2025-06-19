@@ -14,6 +14,7 @@ In Dynamic Analysis maily look for the below Vulnerabilities
 2. SSL Pinning
 3. Insecure Local Storage
 4. Log files
+5. Other Vulnerabilities
 
 ## 1.  Root Detection
 
@@ -127,3 +128,78 @@ Change the method's return value:
 ```bash
 android hooking set return_value 'somemethod' 'somevalue'
 ```
+
+## 3. Insecure Local Storage
+
+Search for files and directories from the root directory:
+
+```bash
+find / -iname '*keyword*'
+```
+
+Search for files and directories in the app specific directories (run `env` in [Objection](#9-objection)):
+
+```bash
+cd /data/user/0/com.someapp.dev/
+
+cd /storage/emulated/0/Android/data/com.someapp.dev/
+
+cd /storage/emulated/0/Android/obb/com.someapp.dev/
+```
+
+If you want to download a whole directory from your Android device, see section [Download/Upload Files and Directories](#downloadupload-files-and-directories).
+
+I preffer downloading the app specific directories, and then doing the [file inspection](#4-inspect-files) on my Kali Linux.
+
+Search for files and directories from the current directory:
+
+```bash
+find . -iname '*keyword*'
+
+for keyword in 'access' 'account' 'admin' 'card' 'cer' 'conf' 'cred' 'customer' 'email' 'history' 'info' 'json' 'jwt' 'key' 'kyc' 'log' 'otp' 'pass' 'pem' 'pin' 'plist' 'priv' 'refresh' 'salt' 'secret' 'seed' 'setting' 'sign' 'sql' 'token' 'transaction' 'transfer' 'tar' 'txt' 'user' 'zip' 'xml'; do find . -iname "*${keyword}*"; done
+```
+
+#### SharedPreferences
+
+Search for files and directories in [SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences) insecure storage directory:
+
+```bash
+cd /data/user/0/com.someapp.dev/shared_prefs/
+```
+
+The files should not be world-readable (e.g., `-rw-rw-r--` is not good, and `-rw-rw----` is good):
+
+```bash
+ls /data/user/0/com.someapp.dev/shared_prefs/ -al
+```
+
+If the production build is [debuggable](https://developer.android.com/topic/security/risks/android-debuggable), it is possible to get the read access rights to the app specific directories as a low-privileged user by leveraging `run-as` command.
+
+Download a file from SharedPreferences as non-root:
+
+```bash
+adb exec-out run-as com.someapp.dev cat /data/user/0/com.someapp.dev/shared_prefs/somefile.xml > somefile.xml
+```
+
+SharedPreferences is unencrypted and backed up by default, and as such, should not contain any sensitive data after user logs out - it should be cleared by calling [SharedPreferences.Editor.clear\(\)](https://developer.android.com/reference/android/content/SharedPreferences.Editor#clear()). It should also be excluded from backups by specifying [dataExtractionRules](https://developer.android.com/guide/topics/data/autobackup#include-exclude-android-12) inside app's AndroidManifest.xml.
+
+## 4. Log files
+Look for the log files of the application example use the below command for the log data
+
+```bash
+adb logcat
+```
+Here.. for suppose\
+
+Sensitive login information, such as usernames and passwords, was found in plaintext within ADB Logcat logs. This indicates that the application is logging credentials insecurely, which can be easily accessed by an attacker with ADB access or through malware on the device. This violates secure coding practices and poses a high security risk. It is critical to ensure that sensitive data is never logged in plaintext.\
+
+Report it!!
+
+## 5. Other Vulnerabilities
+### 5.1. Tap Jacking 
+
+### 5.2. Jenus Vulnerability 
+
+### 5.3. Task Hijacking
+
+### 5.4. Copy and paste allowing
